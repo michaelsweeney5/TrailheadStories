@@ -1,0 +1,60 @@
+{{< layout }}
+{{$ title }}Carts Edit{{/ title }}
+
+{{$ header }}
+
+{{/ header }}
+
+{{$ content}}<div class="panel panel-default">
+    <div class="panel-heading">Edit this cart</div>
+    <div class="panel-body">
+    {{< cart_modal}}
+
+    {{/ cart_modal}}
+        <div class="row">
+            {{# Carts}}
+            <div class="col-md-3">
+                <h3>Current Cart:</h3>
+                <p><b>Customer:</b> {{ customerFirstName }} {{ customerLastName }} </p>
+                <p><b>Start Date:</b> {{ cartStartDate }}</p>
+                <p><b>End Date:</b> {{ cartEndDate }}</p>
+            </div>
+            <div class="col-md-9">
+                <form action="carts.php?action=update" method="post" autocomplete="off">
+                    <input type="hidden" class="form-control" name="cartID" placeholder="YYYY-MM-DD" value="{{cartID}}">
+                    <div class="form-group">
+                        <label for="cartStartDate">Start Date</label>
+                        <input type="date" class="form-control" name="cartStartDate" id="editStartDate" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" onchange="editCheckDate()" value="{{ cartStartDate }}" required>
+                        <p id="startDateErrorMessage"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="cartEndDate">End Date</label>
+                        <input type="date" class="form-control" name="cartEndDate" id="editEndDate" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" onchange="editCheckDate()" value="{{ cartEndDate }}" required>
+                        <p id="endDateErrorMessage"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="cartComments">Trip</label>
+                        <input type="text" class="form-control" name="cartComments" id="editComments" value="{{ cartComments }}" >
+                    </div>
+                    <ul id="cartItemsList{{cartID}}" class="list-group">
+
+                    </ul>
+                    <div class="form-group">
+                        <a class="btn btn-info" onclick="getCartItems({{cartID}})" title="View cart items"><i class="zmdi zmdi-format-list-bulleted"></i></a>
+                        <a class="btn btn-info" href="inventory.php?action=reserve&id={{cartID}}&startDate={{cartStartDate}}&endDate={{cartEndDate}}" title="Add items to this cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
+                        <button type="submit" id="saveButton" class="btn btn-info"><i class="zmdi zmdi-file-plus"></i>&nbsp;Save</button>
+                        <a href="carts.php" class="btn btn-info"><i class="zmdi zmdi-undo"></i>&nbsp;Cancel</a>
+                    </div>
+                </form>
+            </div>
+            {{/Carts}}
+        </div>
+    </div>
+</div>
+{{/ content}}
+
+{{$ scripts }}
+<script src="../js/createCart.js"></script>
+<script src="../js/carts.js"></script>
+{{/ scripts }}
+{{/ layout }}

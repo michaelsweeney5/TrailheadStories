@@ -1,0 +1,47 @@
+{{< layout }}
+{{$ title }}Add Item{{/ title }}
+{{$ nav}}{{/nav}}
+{{$ foot}}{{/foot}}
+{{$ header }}
+{{/ header }}
+
+{{$ content}}
+<!--div class="panel panel-default"-->
+    <div class="panel-heading">Product Availability</div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="list-group">
+                    {{# Inventory}}
+                        <div class="list-group-item">
+                            <a href="inventory.php?pID={{pID}}">
+                                <div class="row-picture">
+                                    <img class="circle" src="http://lorempixel.com/56/56/people/1" alt="icon">
+                                </div>
+                                <div class="row-content">
+                                    <h4 class="list-group-item-heading">{{ pName }}</h4>
+
+                                    <p class="list-group-item-text">{{ pDescription }}</p>
+                                    <br />
+                                    This item is NOT available between:<br />
+                                    {{startDate}}<br />
+                                    and<br />
+                                    {{endDate}}<br />
+                                    <button type='button'>Add To Cart</button>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="list-group-separator"></div>
+                    {{/Inventory}}
+                    <p><center><h4>{{EmptyResultMessage}}</h4></center></p>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--/div-->
+{{/ content}}
+
+{{$ scripts }}
+
+{{/ scripts }}
+{{/ layout }}

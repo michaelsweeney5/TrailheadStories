@@ -1,0 +1,59 @@
+{{< layout }}
+{{$ title }}Dashboard{{/ title }}
+
+{{$ header }}
+{{/ header }}
+
+{{$ content}}
+<div class="panel panel-default">
+    <div class="panel-heading">Dashboard</div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-4 col-centered">
+                {{message}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <h3>Quick Actions</h3>
+                <a href="customers.php?action=add" class="btn btn-info btn-block" role="button"><i class="zmdi zmdi-account-add"></i>&nbsp;New Customer</a>
+                <a href="invoices.php" class="btn btn-info btn-block" role="button"><i class="zmdi zmdi-file-plus"></i>&nbsp;New Reservation</a>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="customers.php" class="btn btn-info btn-block" role="button"><i class="zmdi zmdi-accounts zmdi-hc-5x"></i><br/>Customers</a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="invoices.php" class="btn btn-info btn-block" role="button"><i class="zmdi zmdi-file-text zmdi-hc-5x"></i><br/>Reservations</a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="inventory.php" class="btn btn-info btn-block" role="button"><i class="zmdi zmdi-format-list-bulleted zmdi-hc-5x"></i><br/>Inventory</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="carts.php" class="btn btn-info btn-block" role="button"><i class="zmdi zmdi-shopping-cart zmdi-hc-5x"></i><br/>Carts</a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="invoices.php?action=all" class="btn btn-info btn-block" role="button"><i class="zmdi zmdi-check-circle zmdi-hc-5x"></i><br/>Checkout Equipment</a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="invoices.php?action=checkOut" class="btn btn-info btn-block" role="button"><i class="zmdi zmdi-time-restore zmdi-hc-5x"></i><br/>Return Equipment</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="text-center"><a href="dashboard.php?month={{calendarPreMonth}}&year={{calendarPreYear}}"><i class="zmdi zmdi-skip-previous"></i></a> {{calendarMonth}} {{calendarYear}} <a href="dashboard.php?month={{calendarNextMonth}}&year={{calendarNextYear}}"><i class="zmdi zmdi-skip-next"></i></a></h3>
+                {{{calendar}}}
+            </div>
+        </div>
+    </div>
+</div>
+{{/ content}}
+
+{{$ scripts }}
+{{/ scripts }}
+{{/ layout }}

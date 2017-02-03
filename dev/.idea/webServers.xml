@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="88e6343b-ea4d-4721-a85c-574f008871c3" name="dev.cmuop.com" url="http://dev.cmuop.com">
+        <fileTransfer host="cmuop.com" port="22" privateKey="$USER_HOME$/.ssh/putty_private_key.ppk" accessType="SFTP" username="root" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

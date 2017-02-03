@@ -1,0 +1,79 @@
+{{< layout }}
+{{$ title }}Customer {Details{{/ title }}
+
+{{$ header }}
+{{/ header }}
+
+{{$ content}}
+<div class="panel panel-default">
+    <div class="panel-heading">{{Message}}</div>
+    <div class="panel-body">
+{{# customers}}
+
+    {{< customer_modal}}
+
+    {{/ customer_modal}}
+
+        <div class="row">
+            <div class="col-md-3">
+                <h3>Quick Actions</h3>
+                <a href="customers.php" class="btn btn-info btn-block" role="button"><i class="zmdi zmdi-accounts"></i>&nbsp;Customers List</a>
+                <a href="customers.php?action=add" class="btn btn-info btn-block" role="button"><i class="zmdi zmdi-account-add"></i>&nbsp;New Customer</a>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <form>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" name="search" class="form-control" placeholder="Search Customers...">
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-info">
+                                  <i class="zmdi zmdi-search"></i>
+                              </button>
+                            </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1>{{customerFirstName}} {{customerLastName}} - Balance: ${{customerBalance}}</h1>
+                            <h3>{{ customerType.customerTypeDescription }}</h3>
+                            <h4>Waiver?
+                                {{#customerWaiver}}<a class = "btn btn-md btn-success" title="Waiver signed"><i class=" zmdi zmdi-thumb-up"></i></a>{{/customerWaiver}}
+                                {{^customerWaiver}}<a class = "btn btn-md btn-danger" href="customers.php?action=edit&customerID={{customerID}}" title="Update waiver"><i class=" zmdi zmdi-thumb-down"></i></a>{{/customerWaiver}}
+                            </h4>
+                            <h4>Edit Balance
+                                <a class="btn btn-info" id="editBalance" title="Edit balance"><i class="zmdi zmdi-edit"></i></a>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h2>Address</h2>
+                            <p>
+                                {{customerStreet}}<br/>
+                                {{customerCity}}, {{customerState}} {{customerZip}}
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <h2>Contact Information</h2>
+                            <p>
+                                Phone: {{customerPhone}}<br/>
+                                E-Mail: <a href="mailto:{{customerEmail}}">{{customerEmail}}</a>
+                            </p>
+                        </div>
+                    </div>
+                {{/customers}}
+            </div>
+        </div>
+    </div>
+</div>
+{{/ content}}
+
+{{$ scripts }}
+<script src="../js/customers.js"></script>
+{{/ scripts }}
+{{/ layout }}

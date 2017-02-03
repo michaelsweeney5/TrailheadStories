@@ -1,0 +1,79 @@
+{{< layout }}
+{{$ title }}Inventory{{/ title }}
+{{$ stylesheets}}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+{{/ stylesheets}}
+{{$ header }}
+{{/ header }}
+
+{{$ content}}
+<div class="panel panel-default">
+    <div class="panel-heading">Inventory List</div>
+    <div class="panel-body">
+    {{< inventory_modal}}
+    {{/ inventory_modal}}
+        <div class="row">
+            <div class="col-md-12">
+                <!--form>
+                    <div class="form-group"-->
+                        <input type="text" id="searchBox" class="form-control col-md-8" placeholder="Search"><a class='btn btn-sm btn-info btn-raised' title='Submit search' onclick="Search(document.getElementById('searchBox').value)"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+                    <!--/div>
+                </form-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-centered">
+                {{message}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                {{# admin}}
+                    {{{AdminEditButton}}}
+                {{/ admin}}
+                <h3>Categories</h3>
+                {{#Test}}
+                    {{indentation}}
+                    <!--div class='btn-toolbar'-->
+                        <{{aTag}}{{parent}}{{action}}{{id}}{{startDate}}{{endDate}}'>{{cDescription}}<{{endingTag}}>{{{SingleDatePicker}}}
+                        {{{NewCategoryButton}}}{{{EditCategoryButton}}}{{{DeleteCategoryButton}}}{{{AddToInventoryButton}}}
+                   <!--/div-->
+                    <br />
+                {{/Test}}
+            </div>
+            <div class="col-md-6">
+                <div class="list-group">
+                    {{# Inventory}}
+                        <div class="list-group-item">
+                            <!--a href="product_availability.php?product={{pCategory}}"-->
+                                <div class="row-picture">
+                                    <i class="zmdi zmdi-image"></i>
+                                </div>
+                                <div class="row-content">
+                                    <h4 class="list-group-item-heading">{{ pName }}</h4>
+
+                                    <p class="list-group-item-text">{{ pDescription }}</p>
+                                    {{{AvailabilityTag}}}{{Label}}{{{Ending}}}{{{SeePrices}}}
+                                    {{{AddToCartButton}}}{{{calendarButton}}}{{{dropDownMenu}}}
+                                    {{{Increment}}}{{{Decrement}}}{{{EditPrices}}}{{{EditPackages}}}{{{DeleteTag}}}{{UpdateLabel}}{{{UpdateEnding}}}
+                                    {{{Response}}}
+                                </div>
+                            <!--/a-->
+                        </div>
+                        <div class="list-group-separator"></div>
+                    {{/Inventory}}
+                    <p><center><h4>{{EmptyResultMessage}}</h4></center></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/ content}}
+
+{{$ scripts }}
+    <script src="../js/inventory.js"></script>
+    <script src="../js/carts.js"></script>
+    <script src="../js/inventoryCreateCart.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+{{/ scripts }}
+{{/ layout }}

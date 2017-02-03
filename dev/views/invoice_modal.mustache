@@ -1,0 +1,120 @@
+<!-- Begin Modals section for different alerts and dialogs -->
+    <!-- Build Cart Modal - replaces buildCart() -->
+    <div class="modal fade" id="buildCartModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Build a cart</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" onsubmit="return false;">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" >Customer Name</label>
+                            <div class="col-md-4">
+                                <input id="customerSearch" class="form-control input-md" type="text" onchange="findCustomer()"  placeholder="Search by name/phone" >
+                            </div> <br/><br/>
+                            <p id="searching"></p>
+                            <ul id="nameMessage"></ul>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" >Start Date</label>
+                            <div class="col-md-4">
+                                <input id="cartStartDate" name="cartStartDate" type="date" class="form-control input-md" placeholder="YYYY-MM-DD"  pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" onchange="checkDate()" required>
+                                <p id="startDateInvalidMessage"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" >End Date</label>
+                            <div class="col-md-4">
+                                <input id="cartEndDate" name="cartEndDate" type="date" class="form-control input-md" placeholder="YYYY-MM-DD"  pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" onchange="checkDate()" required>
+                                <p id="endDateInvalidMessage"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" >Trip Description</label>
+                            <div class="col-md-4">
+                                <input id="cartComments"  class="form-control input-md" name="cartComment" type="text" onchange="checkComments()" required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div id="successMessage">
+                        <button class="btn btn-lg btn-info" type="submit" id="createButton" onclick="createCart()"><i class="zmdi zmdi-hc-lg zmdi-check-square"></i></button>
+                        <p id="creating"></p>
+                        <p id="inputInvalidMessage"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Invoice Modal -->
+    <div class="modal fade" id="deleteInvoiceModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete this reservation?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>You cannot undo this operation.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="deleteInvoice()" class="btn btn-info btn-danger" data-dismiss="modal">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Invoice Item Modal -->
+    <div class="modal fade" id="deleteInvoiceItemModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete this invocie item?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>You cannot undo this operation.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="deleteInvoiceItem()" class="btn btn-info btn-danger" data-dismiss="modal">Delete Item</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Check In Invoice Modal -->
+    <div class="modal fade" id="checkInInvoiceModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Check this reservation in?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>This will delete the reservation from the reservation list.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="checkInInvoice()" class="btn btn-info" data-dismiss="modal">Check In Reservation</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Restore Invoice Modal -->
+    <div class="modal fade" id="restoreInvoiceModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Restore old reservation?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>This will add it to the current cart listing.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="restoreInvoice()" class="btn btn-info" data-dismiss="modal">Restore Reservation</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- End Modals section -->

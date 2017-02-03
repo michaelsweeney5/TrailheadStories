@@ -1,0 +1,457 @@
+
+    <div class="modal fade" id="calendarModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Show Dates</h4>
+                </div>
+                <div class="modal-body">
+                  <p><center>Rental Date: <input type="text" onchange="EnableSubmitButton();" id="rent"></center></p>    
+                  <p><center>Return Date: <input type="text" onchange="EnableSubmitButton();" id="return"></center></p>
+                </div>
+                <div class="modal-footer">
+                    <p><center><button type="button" data-toggle="modal" data-target="#cartListModal" class="btn btn-info btn-sm" id="submitDatesButton" onclick="VerifyDatePickerSelection();">Submit</button></center></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="cartListModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Choose Your Cart</h4>
+                </div>
+                <div class="modal-body">
+                  <ul id="cartDropDownList">
+
+                  </ul>
+                </div>
+                <div class="modal-footer">
+                    <p><center><button class="btn btn-md btn-info btn-block" data-toggle="modal" data-target="#buildCartModal" id="buildNewCartButton">Build a New Cart!</button></center></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Build Cart Modal -->
+    <div class="modal fade" id="buildCartModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Build a cart</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" onsubmit="return false;">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" >Customer Name</label>
+                            <div class="col-md-4">
+                                <input id="customerSearch" type="text" placeholder="Search by name/phone" onchange="findCustomer()" class="form-control input-md">
+                            </div> <br/><br/>
+                            <p id="searching"></p>
+                            <ul id="nameMessage"></ul>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" >Start Date</label>
+                            <div class="col-md-4">
+                                <input id="cartStartDate" name="cartStartDate" type="date" class="form-control input-md" placeholder="YYYY-MM-DD"  pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" onchange="checkDate()" required disabled>
+                                <p id="startDateInvalidMessage"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" >End Date</label>
+                            <div class="col-md-4">
+                                <input id="cartEndDate" name="cartEndDate" type="date" class="form-control input-md" placeholder="YYYY-MM-DD"  pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" onchange="checkDate()" required disabled>
+                                <p id="endDateInvalidMessage"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" >Trip Description</label>
+                            <div class="col-md-4">
+                                <input id="cartComments" name="cartComment" onchange="checkComments()" type="text" class="form-control input-md" required>
+                                <input id="hiddenProductID" type="hidden">
+                                <input id="hiddenCategoryID" type="hidden">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div id="successMessage">
+                        <button class="btn btn-lg btn-info" type="submit" id="createButton" onclick="createCart(document.getElementById('hiddenCategoryID').value)"><i class="zmdi zmdi-hc-lg zmdi-check-square"></i></button>
+                        <p id="creating"></p>
+                        <p id="inputInvalidMessage"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- If Inventory Item is Attached To Category, Update (Create New Sub-Category with it) Here -->
+    <div class="modal fade" id="moveCategoryModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">An Item In Inventory Already Exists For This Category</h4>
+                    <h5>Please give this item a new category name</h5>
+                </div>
+                <div class="modal-body">
+                    <p><center>New Category Name: <input type="text" id="newMoveCategoryName"></center></p>
+                    <input id="hiddenCategoryForMove" type="hidden">
+                </div>
+                <div class="modal-footer">
+                    <p><center><button type="button" class="btn btn-info btn-sm" id="submitNewMoveCategoryButton" onclick="VerifyMoveCategoryInput(document.getElementById('newMoveCategoryName').value, document.getElementById('hiddenCategoryForMove').value)">Submit</button></center></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UPDATE Categories Modal -->
+    <div class="modal fade" id="addCategoryModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Enter New Category Information</h4>
+                </div>
+                <div class="modal-body">
+                    <p><center>New Category Name: <input type="text" id="newCategoryName"></center></p>
+                    <input id="hiddenCategoryForUpdate" type="hidden">
+                </div>
+                <div class="modal-footer">
+                    <p><center><button type="button" class="btn btn-info btn-sm" id="submitNewCategoryButton" onclick="VerifyCategoryInput(document.getElementById('newCategoryName').value, document.getElementById('hiddenCategoryForUpdate').value)">Submit</button></center></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- EDIT Category Name Modal -->
+    <div class="modal fade" id="editCategoryNameModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><div id="showCurrentCategoryForNameEdit"></div></h4>
+                </div>
+                <div class="modal-body">
+                    <br />
+                    <center>
+                        <div id="editCategoryNameField">New Name: 
+                            <input type="text" id="editCategoryName">
+                        </div>
+                    </center>
+                    <input id="hiddenCategoryForNameEdit" type="hidden">
+                    <input id="hiddenParentForNameEdit" type="hidden">
+                </div>
+                <div class="modal-footer">
+                    <p><center><button type="button" class="btn btn-info btn-sm" id="submitEditCategoryNameButton" onclick="VerifyCategoryNameChange(document.getElementById('editCategoryName').value, document.getElementById('hiddenCategoryForNameEdit').value, document.getElementById('hiddenParentForNameEdit').value)">Submit</button></center></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- EDIT Category Prices Modal -->
+    <div class="modal fade" id="editCategoryPriceModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><div id="showCurrentCategoryForPriceEdit"></div></h4>
+                </div>
+                <br />
+                <div class="modal-body">
+                    <p>
+                        <style>
+                            #pricesField input {
+                                float: right;
+                            }
+                        </style>
+                            <div id="editCategoryPriceFields">
+                            <b>    
+                                <div id="pricesField">
+                                    Student Price (1 day):
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                            <input class="form-control" type="number" id="studentOneDay" onchange="NoNegatives()" required>
+                                    </div>
+                                </div>
+                                <br />  
+                                <div id="pricesField">
+                                    Student Price (2+ days):
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>                                    
+                                            <input class="form-control" type="number" id="studentTwoPlusDays" onchange="NoNegatives()" required>
+                                    </div>
+                                </div>
+                                <br />
+                                    
+                                <div id="pricesField">
+                                    Faculty/Staff/Alumni (1 day):
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>                                    
+                                            <input class="form-control" type="number" id="facultyStaffAlumniOneDay" onchange="NoNegatives()" required>
+                                    </div>
+                                </div>
+                                <br />
+                                    
+                                <div id="pricesField">
+                                    Faculty/Staff/Alumni (2+ days):
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>                                    
+                                            <input class="form-control" type="number" id="facultyStaffAlumniTwoPlusDays" onchange="NoNegatives()" required>
+                                    </div>
+                                </div>
+                                <br />
+                                    
+                                <div id="pricesField">
+                                    Public (1 day):
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>                                    
+                                            <input class="form-control" type="number" id="publicOneDay" onchange="NoNegatives()" required>
+                                    </div>
+                                </div>
+                                <br />
+                                    
+                                <div id="pricesField">
+                                    Public (2+ days):
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>                                    
+                                            <input class="form-control" type="number" id="publicTwoPlusDays" onchange="NoNegatives()" required>
+                                    </div>
+                                </div>
+                            </b>
+                            </div>
+                    </p>
+                    <input id="hiddenNameForPriceEdit" type="hidden">
+                    <input id="hiddenDescriptionForPriceEdit" type="hidden">
+                    <input id="hiddenCategoryForPriceEdit" type="hidden">
+                </div>
+                <div class="modal-footer">
+                    <p><center><button type="button" class="btn btn-info btn-sm" id="submitEditCategoryPricesButton" onclick="VerifyCategoryPriceEdit(document.getElementById('hiddenNameForPriceEdit').value, document.getElementById('hiddenDescriptionForPriceEdit').value, document.getElementById('hiddenCategoryForPriceEdit').value, document.getElementById('studentOneDay').value, document.getElementById('studentTwoPlusDays').value, document.getElementById('facultyStaffAlumniOneDay').value, document.getElementById('facultyStaffAlumniTwoPlusDays').value, document.getElementById('publicOneDay').value, document.getElementById('publicTwoPlusDays').value)">Submit</button></center></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DELETE Category Modal -->
+    <div class="modal fade" id="deleteCategoryModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><div id="showCurrentCategoryForDelete"></div></h4>
+
+                </div>
+                <div class="modal-body">
+                    <br />
+                    <b><p><center><div id="deleteCategoryConfirmation"></div></center></p></b>
+                    <input id="hiddenCategoryNameForDelete" type="hidden">
+                    <input id="hiddenCategoryForDelete" type="hidden">
+                    <input id="hiddenParentForDelete" type="hidden">
+                </div>
+                <div class="modal-footer">
+                    <p><center><button type="button" class="btn btn-info btn-sm" id="submitDeleteCategoryButton" onclick="ExecuteCategoryDelete(document.getElementById('hiddenCategoryNameForDelete').value, document.getElementById('hiddenCategoryForDelete').value, document.getElementById('hiddenParentForDelete').value)">Delete</button></center></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Inventory Item Modal -->
+    <div class="modal fade" id="addInventoryItemModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Enter New Inventory Item Data</h4>
+                </div>
+                <div class="modal-body">
+                    <input id="hiddenCategoryForAddingInventory" type="hidden">
+                    <p><center>Item Name: <input type="text" id="newItemName"></center></p>
+                    <p><center>Item Description: <input type="text" id="newItemDescription"></center></p>
+                    <p><center>Lifespan: <input type="text" id="newItemLifespan"></center></p>
+                    <p><center>Purchase Date: <input type="date" id="newItemPurchaseDate"></center></p>
+                    <p><center>Item Cost: <input type="text" id="newItemCost"></center></p>
+                    <p><center>NOT Reservable: <input type="checkbox" id="newItemReservable"></center></p>
+                </div>
+                <div class="modal-footer">
+                    <p><center><button type="button" class="btn btn-info btn-sm" id="submitNewInventoryItemButton" onclick="VerifyAddInventory(  document.getElementById('hiddenCategoryForAddingInventory').value, document.getElementById('newItemName').value, document.getElementById('newItemDescription').value, document.getElementById('newItemLifespan').value, document.getElementById('newItemPurchaseDate').value, document.getElementById('newItemCost').value)">Submit</button></center></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DELETE Inventory Item Modal -->
+    <div class="modal fade" id="deleteInventoryItemModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><div id="showInventoryItemForDelete"></div></h4>
+                    <br />
+                    <center><b><div id="deleteFromInventoryConfirmationMessage"></div></b></center>
+                </div>
+                <div class="modal-body">
+                    <input id="hiddenInventoryNameForDelete" type="hidden">
+                    <input id="hiddenInventoryDescriptionForDelete" type="hidden">
+                    <input id="hiddenInventoryCategoryForDelete" type="hidden">
+                </div>
+                <div class="modal-footer">
+                    <p><center><button type="button" class="btn btn-info btn-sm" id="submitDeleteFromInventoryButton" onclick="ExecuteInventoryItemDelete(document.getElementById('hiddenInventoryNameForDelete').value,document.getElementById('hiddenInventoryDescriptionForDelete').value,document.getElementById('hiddenInventoryCategoryForDelete').value)">Delete!</button></center></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- INCREMENT Inventory Item Modal -->
+    <div class="modal fade" id="incrementInventoryItemModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><center><div id="showInventoryItemForIncrement"></div></center></h4>
+                </div>
+                <br />
+                <b><center>Please select an option below</center></b>
+                <br />
+                <div class="modal-body">
+                    <input id="hiddenCategoryForInventoryItemIncrementation" type="hidden">
+                    <center>
+                    Return Item From Repair Service: <input id="returnFromRepair" value="returnFromRepair" type="checkbox" onchange="ToggleCheckboxes('returnFromRepair')">
+                    <br />
+                    Add New Item: <input id="incrementNew" value="incrementNew" type="checkbox" onchange="ToggleCheckboxes('incrementNew')">
+                    <br />
+                        <div id="incrementPurchaseDateLabel">Purchase Date: 
+                            <input id="inventoryItemPurchaseDate" type="date">
+                        </div>
+                    <br />
+                        <div id="incrementPurchaseCostLabel">Your Cost: 
+                            <input id="inventoryItemCost" type="text">
+                        </div>
+                    <br />
+                    </center>
+                </div>
+                <div class="modal-footer">
+                    <p><center><button type="button" class="btn btn-info btn-sm" id="submitIncrementInventoryItemButton" onclick="ExecuteInventoryItemIncrementation(document.getElementById('hiddenCategoryForInventoryItemIncrementation').value,document.getElementById('inventoryItemPurchaseDate').value,document.getElementById('inventoryItemCost').value)">Submit</button></center></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- DECREMENT Inventory Item Modal -->
+    <div class="modal fade" id="decrementInventoryItemModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><center><div id="showInventoryItemForDecrement"></div></center></h4>
+                </div>
+                <br />
+                <b><center>Please select an option below</center></b>
+                <br />
+                <div class="modal-body">
+                    <input id="hiddenCategoryForInventoryItemDecrementation" type="hidden">
+                    <center>
+                    Flag A Single Item For Repair: <input id="flagForRepair" value="repair" type="checkbox" onchange="ToggleCheckboxes('repair')">
+                    <br />
+                    Remove A Single Item: <input id="flagForRemoval" value="remove" type="checkbox" onchange="ToggleCheckboxes('remove')">
+                </center>
+                </div>
+                <div class="modal-footer">
+                    <p><center><button type="button" class="btn btn-info btn-sm" id="submitDecrementInventoryItemButton" onclick="ExecuteInventoryItemDecrementation(document.getElementById('hiddenCategoryForInventoryItemDecrementation').value, document.getElementById('flagForRepair').value,document.getElementById('flagForRemoval').value)">Submit</button></center></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Package Modal -->
+    <div class="modal fade" id="packageModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="Modal Title"><div id="addToPackageHeader"></div></h4>
+                </div>
+                <div class="modal-body">
+                    <ul id="packageList"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Single Date Picker Modal -->
+    <div class="modal fade" id="singleDatePickerModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <center><h4 class="modal-title">Select a date to view available quantities</h4></center>
+                </div>
+                <div class="modal-body">
+                    <input id="hiddenCategoryForSingleDatePicker" type="hidden">
+                    <input id="hiddenDescriptionForSingleDatePicker" type="hidden">
+                    <br />
+                        <p><center>Date: <input type="date" placeholder="yyyy-mm-dd" onchange="GatherSingleDatePickerData()" id="singleDatePickerField"></center></p>
+                    <br />
+                    <br />
+                    <b><div id="singleDatePickerQuantity"></div></b>
+                </div>
+                <div class="modal-footer">
+                    <p><center><button type="button" data-toggle="modal" class="btn btn-info btn-sm" onclick="CloseSingleDatePicker()">Close</button></center></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<style>
+    table, th, td {
+        border: 1px solid black;
+    }
+</style>
+    <!-- Show Inventory Prices Modal -->
+    <div class="modal fade" id="showInventoryPricesModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <center><h4 class="modal-title">Prices for: <div id="showCategoryForPrices"></div></h4></center>
+                </div>
+                <div class="modal-body">
+                    <input id="hiddenCategoryForShowingPrices" type="hidden">
+                    <center><div id="displayErrorForShowPrices"></center>
+                    <br />
+                    <br />
+                    <center>
+                    <table style="width:75%">
+                        <tr>
+                            <td></td>
+                            <td><center><b>Student</b></center></td>
+                            <td><center><b>Faculty/Staff/Alumni</b></center></td>
+                            <td><center><b>Public</b></center></td>
+                        </tr>
+                        <tr>
+                            <td><center><b>One Day:</b></center></td>
+                            <td id="showStudentOneDayPrice"></td>
+                            <td id="showFSAOneDayPrice"></td>
+                            <td id="showPublicOneDayPrice"></td>
+                        </tr>
+                        <tr>
+                            <td><center><b>2+ Days:</b></center></td>
+                            <td id="showStudentTwoPlusDaysPrice"></td>
+                            <td id="showFSATwoPlusDaysPrice"></td>
+                            <td id="showPublicTwoPlusDaysPrice"></td>
+                        </tr>
+                    </table>
+                    </center>
+                    <br />
+                </div>
+                <div class="modal-footer">
+                    <p><center><button type="button" class="btn btn-info btn-sm" onclick="CloseShowPrices()">Close</button></center></p>
+                </div>
+            </div>
+        </div>
+    </div>

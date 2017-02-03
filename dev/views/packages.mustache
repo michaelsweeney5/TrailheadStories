@@ -1,0 +1,66 @@
+{{< layout }}
+{{$ title }}Packages{{/ title }}
+
+{{$ header }}
+
+{{/ header }}
+{{$ content}}
+<div class="panel panel-default">
+    <div class="panel-heading">{{#alert}}<i class="zmdi zmdi-alert-circle zmdi-hc-2x"></i>{{/alert}}{{Message}}</div>
+    <div class="panel-body">
+    <!-- Delete Package Item Modal -->
+    <div class="modal fade" id="deletePackageItemModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete this package item?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>You cannot undo this operation.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="deletePackageItem()" class="btn btn-info btn-danger" data-dismiss="modal">Delete Item</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-9">
+            {{# Packages}}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="list-group">
+
+                            <div class="list-group-item">
+                                <div class="row-picture">
+                                    <a href="customers.php?cID={{customerID}}"><i class="zmdi zmdi-card-giftcard"></i></a>
+                                </div>
+                                <div class="row-content">
+                                    <div class="col-md-9">
+                                        <h4><b>Package:</b>{{packageID}} {{ packageName }} </h4>
+                                        <a class="btn btn-sm btn-info" onclick="getPackageItems({{packageID}})" title="View package items"><i class="zmdi zmdi-format-list-bulleted"></i></a>
+                                        <ul id="packageItemsList{{packageID}}" class="list-group">
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-separator"></div>
+
+                        </div>
+                    </div>
+                </div>
+            {{/Packages}}
+        </div>
+    </div>
+</div>
+{{/ content}}
+
+{{$ scripts }}
+    <!-- bootbox code -->
+    <script src="../js/vendor/bootbox.min.js"></script>
+    <script src="../js/packages.js"></script>
+{{/ scripts }}
+{{/ layout }}

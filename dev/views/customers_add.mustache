@@ -1,0 +1,88 @@
+{{< layout }}
+{{$ title }}Add Customer{{/ title }}
+
+{{$ header }}
+
+{{/ header }}
+
+{{$ content}}
+<div class="panel panel-default">
+    <div class="panel-heading">{{Message}}</div>
+    <div class="panel-body">
+
+    {{< customer_modal}}
+
+    {{/ customer_modal}}
+
+        <div class="row">
+            <div class="col-md-3">
+                <a href="customers.php" class="btn btn-info btn-block" role="button"><i class="zmdi zmdi-accounts"></i>&nbsp;Add Customer</a>
+            </div>
+            <div class="col-md-9">
+                <form action="customers.php?action=insert" method="post" autocomplete="off">
+                    <div class="form-group">
+                        <label for="customerType">Customer Type (1=Student, 2=Faculty/Staff/Alumn, 3=Public)</label>
+                        <input type="number" class="form-control" name="customerType" placeholder="1" maxlength="1" min="1" max="3" step="1" value="{{post.customerType}}" required>
+                        <p id="customerTypeInvalidMessage"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerFirstName">First Name</label>
+                        <input type="text" class="form-control" name="customerFirstName" placeholder="John" required value="{{post.customerFirstName}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="customerLastName">Last Name</label>
+                        <input type="text" class="form-control" name="customerLastName" placeholder="Doe" required value="{{post.customerLastName}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="customerEmail">E-Mail</label>
+                        <input type="email" class="form-control" name="customerEmail" placeholder="flast@coloradomesa.edu" required value="{{post.customerEmail}}">
+                        <p id="customerEmailInvalidMessage"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerStreet">Address</label>
+                        <input type="text" class="form-control" name="customerStreet" placeholder="123 Street" value="{{post.customerStreet}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="customerCity">City</label>
+                        <input type="text" class="form-control" name="customerCity" placeholder="Grand Junction" value="{{post.customerCity}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="customerState">State</label>
+                        <input type="text" class="form-control" name="customerState" placeholder="CO" maxlength="2" value="{{post.customerState}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="customerZipCode">Zip Code</label>
+                        <input type="text" class="form-control" name="customerZipCode" placeholder="81520" pattern="(\d{5}([\-]\d{4})?)" value="{{post.customerZipCode}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="customerPhone">Phone Number</label>
+                        <input type="text" class="form-control" name="customerPhone" placeholder="970-000-0000" pattern="\d{3}[\-]\d{3}[\-]\d{4}" required value="{{post.customerPhone}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="customerDriverLicense">Drivers License</label>
+                        <input type="text" class="form-control" name="customerDriverLicense" placeholder="CO 00-0000" value="{{post.customerDriverLicense}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="customerComment">Extra Comments</label>
+                        <input type="text" class="form-control" name="customerComment" placeholder="Extra Comments" value="{{post.customerComment}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="customerWaiver">Waiver Signed?</label></br>
+                        <a class="btn btn-info" onclick="waiverYes()" > Yes </a>
+                        <input id="customerWaiver" name="customerWaiver" type="hidden" value="0">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info"><i class="zmdi zmdi-account-add"></i>&nbsp;Save</button>
+                        <a href="customers.php" class="btn btn-info"><i class="zmdi zmdi-undo"></i>&nbsp;Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{/ content}}
+
+{{$ scripts }}
+<script src="../js/customers.js"></script>
+{{/ scripts }}
+{{/ layout }}

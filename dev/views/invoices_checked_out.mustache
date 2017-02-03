@@ -1,0 +1,65 @@
+{{< layout }}
+{{$ title }}Invoices Checked Out{{/ title }}
+
+{{$ header }}
+
+{{/ header }}
+
+{{$ content}}
+<div class="panel panel-default">
+    <div class="panel-heading">{{Message}}</div>
+    <div class="panel-body">
+
+    {{< invoice_modal}}
+
+    {{/ invoice_modal}}
+
+        <div class="row">
+                <div class="col-md-3">
+                    <h4>Reservation Actions</h4>
+                    <button class="btn btn-md btn-info btn-block" data-toggle="modal" data-target="#buildCartModal"><i class="zmdi zmdi-file-plus"></i>&nbsp;New</button>
+                    <a class="btn btn-md btn-info btn-block" href="invoices.php"><i class="zmdi zmdi-calendar"></i>&nbsp;Today's</a>
+                    <a class="btn btn-md btn-info btn-block" href="invoices.php?action=checkOut"><i class="zmdi zmdi-check-square"></i>&nbsp;Checked Out</a>
+                    <a class="btn btn-md btn-info btn-block" href="invoices.php?action=all"><i class="zmdi zmdi-format-list-bulleted"></i>&nbsp;All</a>
+                    <a class="btn btn-md btn-info btn-block" href="invoices.php?action=old"><i class="zmdi zmdi-calendar-close"></i>&nbsp;Old</a>
+                </div>
+                <div class="col-md-9">
+                    <div class="list-group">
+                        {{# Invoices}}
+                            <div class="list-group-item">
+                                <div class="row-picture">
+                                    <a href="customers.php?cID={{customerID}}"><i class="zmdi zmdi-account-o"></i></a>
+                                </div>
+                                <div class="row-content">
+                                    <div class="col-md-6">
+                                        <h4><b>Customer:</b> {{ customerFirstName }} {{ customerLastName }}</h4>
+                                        <p class="list-group-item-text"><b>Phone:</b> {{ customerPhone }}</p>
+                                        <p class="list-group-item-text"><b> {{ invoiceStartDate }} </b> to <b> {{ invoiceEndDate }} </b> </p>
+                                        <p class="list-group-item-text"><b>Trip: </b> {{ invoiceComments }}</p>
+                                        <ul id="invoiceItemsList{{invoiceID}}" class="list-group">
+
+                                        </ul>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a class="btn btn-sm btn-info" onclick="getInvoiceItems({{invoiceID}})" title="View reservation items"><i class="zmdi zmdi-format-list-bulleted"></i></a>
+                                        <a class="btn btn-sm btn-info" href="invoices.php?action=edit&invoiceID={{invoiceID}}" title="Edit this reservation."><i class="zmdi zmdi-edit"></i></a>
+                                        <a class="btn btn-sm btn-info" href="invoices.php?invoiceID={{invoiceID}}" title="Reservation details."><i class="zmdi zmdi-money"></i></a>
+                                        <a class="btn btn-sm btn-info" id="checkInButton" href="invoices.php?action=checkIn&invoiceID={{invoiceID}}&invoiceStartDate={{invoiceStartDate}}&invoiceEndDate={{invoiceEndDate}}" title="Check in this reservation."><i class="zmdi zmdi-check-square"> In</i></a>
+                                    </div>
+                                </div>
+                                </a>
+                            </div>
+                            <div class="list-group-separator"></div>
+                        {{/ Invoices}}
+                    </div>
+                </div>
+</div>
+{{/ content}}
+
+{{$ scripts }}
+<!-- bootbox code -->
+<script src="../js/vendor/bootbox.min.js"></script>
+<script src="../js/createCart.js"></script>
+<script src="../js/invoices.js"></script>
+{{/ scripts }}
+{{/ layout }}

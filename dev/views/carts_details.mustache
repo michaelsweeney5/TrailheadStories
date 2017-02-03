@@ -1,0 +1,89 @@
+{{< layout }}
+{{$ title }}Cart Details{{/ title }}
+
+{{$ header }}
+
+{{/ header }}
+
+{{$ content}}
+<div class="panel panel-default">
+    <div class="panel-heading">Cart Details</div>
+    <div class="panel-body">
+    {{< cart_modal}}
+
+    {{/ cart_modal}}
+        <div class="row">
+            <div class="col-md-3">
+                <h4>Cart Actions</h4>
+                <button class="btn btn-md btn-info btn-block" data-toggle="modal" data-target="#buildCartModal"><i class="zmdi zmdi-file-plus"></i>&nbsp;New</button>
+                <a class="btn btn-md btn-info btn-block" href="carts.php"><i class="zmdi zmdi-shopping-cart"></i>&nbsp;Mine</a>
+                <a class="btn btn-md btn-info btn-block" href="carts.php?action=all"><i class="zmdi zmdi-shopping-cart"></i>&nbsp;All</a>
+            </div>
+            <div class="col-md-9">
+                <div class="list-group">
+                    {{# CartDetails}}
+                        <div class="list-group-item">
+                            <div class="row-picture">
+                                <a href="customers.php?cID={{customerID}}"><i class="zmdi zmdi-account-o"></i></a>
+                            </div>
+                            <div class="col-md-6">
+                                <h4><b>Customer:</b> {{ customerFirstName }} {{ customerLastName }} </h4>
+                                <p class="list-group-item-text"><b>Renter Type:</b> {{CustomerType.customerTypeName}} </p>
+                                <p class="list-group-item-text"><b>Phone:</b> {{ customerPhone }} </p>
+                                <p class="list-group-item-text"><b>Start Date: </b> {{ cartStartDate }}</p>
+                                <p class="list-group-item-text"><b>End Date:</b> {{ cartEndDate }} </p>
+                                <p class="list-group-item-text"><b>Trip Description:</b> {{ cartComments }} </p>
+                                <input type="hidden" id="priceColumn" value="{{priceColumn}}">
+                                <p><b>Cart Items:</b></p>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Product Description</th>
+                                        <th>Price/Day</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {{#CartItems}}
+                                        <tr>
+                                            <td>{{pDescription}}</td>
+                                            <td>${{0}}</td>
+                                        </tr>
+                                    {{/CartItems}}
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td>Package Price: </td>
+                                        <td>${{cartPackage}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Total</b></td>
+                                        <td id="cartTotal">${{CartTotal}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Package Total</b></td>
+                                        <td><b>${{PackageTotal}}</b></td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                                <div class="btn-group">
+                                    <a class="btn btn-sm btn-info" href="inventory.php?action=reserve&id={{cartID}}&startDate={{cartStartDate}}&endDate={{cartEndDate}}" title="Add items to this cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                    <a class="btn btn-sm btn-info" href="carts.php?action=edit&cartID={{cartID}}" title="Edit this cart"><i class="zmdi zmdi-edit"></i></a>
+                                    <a class="btn btn-sm btn-info" id="completeButton" href="invoices.php?action=add&cartID={{cartID}}" title="Complete this reservation"><i class="zmdi zmdi-calendar-check"></i></a>
+                                    <a class="btn btn-sm btn-danger" id="deleteButton" href="carts.php?action=delete&cartID={{cartID}}" title="Delete this cart"><i class="zmdi zmdi-delete"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-separator"></div>
+                    {{/CartDetails}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/ content}}
+
+{{$ scripts }}
+    <script src="../js/createCart.js"></script>
+    <script src="../js/carts.js"></script>
+{{/ scripts }}
+{{/ layout }}

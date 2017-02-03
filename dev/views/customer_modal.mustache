@@ -1,0 +1,55 @@
+<!-- Begin Modals section for different alerts and dialogs -->
+    <!-- Delete Customer Modal -->
+    <div class="modal fade" id="deleteCustomerModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete this customer?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>You cannot undo this operation.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="deleteCustomer()" class="btn btn-info btn-danger" data-dismiss="modal">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Waiver Modal -->
+    <div class="modal fade" id="customerWaiverModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Did they sign?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Sweet. <i class="zmdi zmdi-thumb-up"></i></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="waiverSigned" class="btn btn-info" data-dismiss="modal">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Balance Modal -->
+    <div class="modal fade" id="customerBalanceModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit {{customerFirstName}} {{customerLastName}}'s Balance</h4>
+                </div>
+                <div class="modal-body">
+                    Balance: <input id="newBalanceInput" type="text">
+                    <input id="hiddenCustomerID" type="hidden" value="{{customerID}}">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="editBalanceSubmit" class="btn btn-info" data-dismiss="modal">Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>

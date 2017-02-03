@@ -1,0 +1,120 @@
+﻿<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CMU Outdoor Program - {{$ title }}{{/ title }}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link href="css/owfont-regular.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+          integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+          crossorigin="anonymous">
+    <link rel="stylesheet" crossorigin="anonymous" integrity="sha256-p0/iVfR0LuqHGu3GCH2nWOue38ZbSCkqOjUyD938vO8="
+          href="https://cdn.jsdelivr.net/bootstrap.material-design/0.3.0/css/material.min.css">
+    <link rel="stylesheet" crossorigin="anonymous" integrity="sha256-mGKHVBmAirDoQlwvLMxK420/crYglhhG66NuFllbsTk="
+          href="https://cdn.jsdelivr.net/bootstrap.material-design/0.3.0/css/material-fullpalette.min.css">
+    <link rel="stylesheet" crossorigin="anonymous" integrity="sha256-Uat/wUMVJWoG8tXe22W6H2Nfpkb60Oa1MRevam8VXvw="
+          href="https://cdn.jsdelivr.net/bootstrap.material-design/0.3.0/css/roboto.min.css">
+    <link rel="stylesheet" crossorigin="anonymous" integrity="sha256-Ztt7SyM4Vtwck8v9rf9TyshSt4ZeGGcOBdIYSYxh+zQ="
+          href="https://cdn.jsdelivr.net/bootstrap.material-design/0.3.0/css/ripples.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/modal.css">
+{{$ stylesheets }}
+{{/ stylesheets }}
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+<body>
+{{$ nav}}
+<div class="navbar navbar-info">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target=".navbar-responsive-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="dashboard.php">CMU OP</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-responsive-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="dashboard.php">Dashboard</a></li>
+                <li><a href="customers.php">Customers</a></li>
+                <li><a href="invoices.php">Reservations</a></li>
+                <li><a href="inventory.php">Inventory</a></li>
+                <li><a href="users.php">Users</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="carts.php" title="View active carts"><i class="zmdi zmdi-shopping-cart zmdi-hc-lg"></i></a></li>
+                {{# admin }}
+                    <li>
+                        <a href="packages.php" title="Edit packages"><i class="zmdi zmdi-card-giftcard"></i></a>
+                    </li>
+                {{/ admin }}
+                <li><a href="http://forecast.weather.gov/MapClick.php?lat=39.0638698570005&lon=-108.55064650799972"
+                       target="_blank">{{weatherNav.CurrentTemp}}&#8457; {{weatherNav.CurrentCondition}} <i
+                        class="owf owf-{{weatherNav.CurrentImage}} owf-1x"></i></a></li>
+                <li><a href="logout.php">Log Out</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{{/ nav}}
+<div class="container">
+{{$ header }}
+    <h1>TEST PAGE</h1>
+{{/ header }}
+<div class="panel panel-default">
+{{$ content }}
+    <p>TEST!</p>
+{{/ content }}
+{{$ foot}}
+</div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <p class="text-center">CMU OP - &copy; 2015-2016</p>
+            <p class="text-center"><a href="logout.php">Log Out</a></p>
+        </div>
+    </div>
+</div>
+{{/ foot}}
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
+<!-- <script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.11.3.min.js"><\/script>')</script> -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
+        integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
+        crossorigin="anonymous"></script>
+<script crossorigin="anonymous" integrity="sha256-COBDKFUzMc5Hnxno1STARwIpmgRWc1go66iccILi25I="
+        src="https://cdn.jsdelivr.net/bootstrap.material-design/0.3.0/js/material.min.js"></script>
+<script crossorigin="anonymous" integrity="sha256-ohTBe0Lu6LNFE8k25+PJLZAMjel2idqzcF6vL0zUIJE="
+        src="https://cdn.jsdelivr.net/bootstrap.material-design/0.3.0/js/ripples.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
+<script>
+    $.material.init();
+</script>
+{{$ scripts }}
+{{/ scripts }}
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-', 'auto');
+    ga('send', 'pageview');
+</script>
+</body>
+</html>
